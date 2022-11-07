@@ -1,4 +1,3 @@
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   publicPath: "./", // 静态资源路径（默认/，打包后会白屏）
   outputDir: "dist", // 打包后文件的目录 （默认为dist）

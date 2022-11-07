@@ -16,17 +16,15 @@
         <button @click="pause">暂停</button>
       </div>
     </div>
-    <!-- @message="$message" v-loading="bLoading" :loading.sync="bLoading" element-loading-text="加载中..." element-loading-background="#000" -->
     <EasyPlayer
       alt="信号丢失，请检查设备网络"
       debug
       :onDemand="true"
       id="EasyPlayer"
       ref="EasyPlayer"
-      poster="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.niutuku.com%2Fdesk%2F1208%2F1300%2Fntk-1300-31979.jpg&refer=http%3A%2F%2Fimg2.niutuku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668924747&t=810da98ce1a83aa65bab0dd515992fce"
       :hasaudio="true"
       :hasvideo="true"
-      videoUrl="http://zhyl.zwyun.bjtzh.gov.cn:18050/flv/live/11011200002000115116_11011201581314000116_0112010116.flv"
+      videoUrl="http://219.151.31.38/liveplay-kk.rtxapp.com/live/program/live/hnwshd/4000000/mnf.m3u8"
       fluent
       auto-play="true"
       :live="true"
@@ -47,63 +45,23 @@ export default {
     EasyPlayer,
   },
   data() {
-    return {
-      bLoading: false,
-    };
+    return {};
   },
-  mounted() {
-    console.dir(this.$refs.EasyPlayer);
-    window.myEasyPlayer = this.$refs.EasyPlayer;
-  },
+
   methods: {
-    ended() {
-      [...this.$refs.EasyPlayer.$el.children]
-        .find((i) => {
-          if (i.className == "easy-video-player-inner") {
-            return i;
-          }
-        })
-        .children[0].children[0].ended();
-    },
-    pause() {
-      console.log(
-        this.$refs.EasyPlayer.$el.children[0].children[0].children[0]
-      );
-      [...this.$refs.EasyPlayer.$el.children]
-        .find((i) => {
-          if (i.className == "easy-video-player-inner") {
-            return i;
-          }
-        })
-        .children[0].children[0].pause();
-    },
-    /* 播放失败时触发 */
     error() {
-      console.log("播放失败时，");
       this.$refs.EasyPlayer.destroyPlayer();
       this.$refs.EasyPlayer.initPlayer();
-      // this.$refs.EasyPlayer.restartPlayer();
+    },
+    restartPlayer() {
+      let player = this.$refs.EasyPlayer;
+      player.initPlayer();
     },
     initPlayer() {
-      // console.log(this.$refs.EasyPlayer.initPlayer);
       this.$refs.EasyPlayer.initPlayer();
     },
     destroyPlayer() {
       this.$refs.EasyPlayer.destroyPlayer();
-    },
-    play() {
-      [...this.$refs.EasyPlayer.$el.children]
-        .find((i) => {
-          if (i.className == "easy-video-player-inner") {
-            return i;
-          }
-        })
-        .children[0].children[0].play();
-    },
-    restartPlayer() {
-      let player = this.$refs.EasyPlayer;
-      // player = player.getVueInstance();
-      player.initPlayer();
     },
   },
 };
